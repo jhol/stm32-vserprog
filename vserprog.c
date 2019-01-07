@@ -242,10 +242,10 @@ void handle_command(unsigned char command) {
 
     case 0x16: {
       unsigned int j;
-      gpio_clear(GPIOA, GPIO0);
+      gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, GPIO0);
       for (j = 0; j < 5000000; j++)
         asm("nop");
-      gpio_set(GPIOA, GPIO0);
+      gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO0);
       break;
     }
 
@@ -415,8 +415,8 @@ int main(void) {
 #endif /* BOARD_USB_HIGH_IS_PULLUP */
 #endif /* STM32F0 */
 
-  gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, GPIO0);
-  gpio_set(GPIOA, GPIO0);
+  gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO0);
+  gpio_clear(GPIOA, GPIO0);
 
   usbcdc_init();
   spi_setup(SPI_DEFAULT_CLOCK);
