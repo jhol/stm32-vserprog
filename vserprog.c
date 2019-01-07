@@ -243,7 +243,7 @@ void handle_command(unsigned char command) {
     case 0x16: {
       unsigned int j;
       gpio_set_mode(GPIOA, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, GPIO0);
-      for (j = 0; j < 5000000; j++)
+      for (j = 0; j < 2000000; j++)
         asm("nop");
       gpio_set_mode(GPIOA, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO0);
       break;
